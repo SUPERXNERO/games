@@ -192,6 +192,7 @@
             gameElement.appendChild(gameImg);
             gameImg.onerror = function() {
               const alternativeImg = "/storage/emulated/0/Download/game.png";
+              if (alternativeImg === gameImg.src) return;
               gameImg.src = alternativeImg;
             }
 
