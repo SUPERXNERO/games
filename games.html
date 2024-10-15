@@ -1,0 +1,458 @@
+<div id="realPage">
+  <style class="realStyle">
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--theme-bg-0);
+    }
+    #languages {
+      position: fixed;
+      top: 0;
+      left: 0;
+      color: var(--theme-bg-3);
+      z-index: 99;
+      margin: 4px;
+    }
+    #currentLanguage,#availableLanguages .language {
+      padding: 8px;
+      min-width: 100px;
+      border: 2px solid transparent;
+      background: var(--theme-bg-5);
+      transition: .2s;
+    }
+    :is(#currentLanguage, #availableLanguages .language):active {
+      /*filter: brightness(1.5);
+      border-color: var(--theme-bg-5);
+      transform: scale(.9);*/
+    }
+    #availableLanguages {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: .2s;
+    }
+    #availableLanguages.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #gamesContainer {
+      margin-block-start: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .game {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 250px;
+      background: var(--theme-bg-2);
+      filter: hue-rotate(-8deg) brightness(206.880733945%) saturate(141.0256410256%);
+      border: 5px solid transparent;
+      border-radius: 4px;
+      margin: 10px;
+      padding: 6px;
+      transition: .2s;
+    }
+    .game:active {
+      /*filter: brightness(1.5);*/
+      border-color: var(--theme-bg-5);
+      transform: scale(.95);
+    }
+    .game-img {
+      max-width: 90%;
+    }
+    .game-name {
+      color: var(--theme-bg-3);
+      text-align: center;
+      margin: 6px 0;
+    }
+    .game-description {
+      color: var(--theme-bg-4);
+      text-align: center;
+    }
+  </style>
+  <style class="realStyle keyFramesStyle">
+  </style>
+  <div id="languages">
+    <div id="currentLanguage">
+    </div>
+    <div id="availableLanguages">
+    </div>
+  </div>
+  <div id="container">
+    <div id="gamesContainer"></div>
+  </div>
+  <script class="realScript" defer>
+    const q = (e)=> document.querySelector(e);
+    const qA = (e)=> document.querySelectorAll(e);
+    const root = document.documentElement;
+    const body = document.body;
+    const realPage = q("#realPage");
+    
+    /* start real code */
+    async function realCode() {
+      await startClean();
+      const gamesContainer = q("#gamesContainer");
+      const currentLanguage = q("#currentLanguage");
+      const availableLanguages = q("#availableLanguages");
+
+      const languagesContent = {
+        "ar": {
+          "ticTacToeName": "اكس اوه",
+          "ticTacToeDescription": "وصف لعبة اكس اوه",
+
+          "questionsGameName": "لعبة الاسئلة",
+          "questionsGameDescription": "وصف لعبة الاسئلة",
+          
+          "arLanguage": "عربي",
+          "enLanguage": "انجليزي"
+        },
+        "en": {
+          "ticTacToeName": "tic tac toe",
+          "ticTacToeDescription": "the description of the game of xo",
+
+          "questionsGameName": "questions game",
+          "questionsGameDescription": "the description of the game of questions",
+          
+          "arLanguage": "arabic",
+          "enLanguage": "english"
+        }
+      }
+      const themes = {
+        0: ["#1C2127",
+          "#444750",
+          "#31353E",
+          "#E2E2E6",
+          "#939395",
+          "#607186",
+          "#2B2D33"],
+        1: ["#1C2127",
+          "#10131C",
+          "#3E4659",
+          "#E2E2E6"],
+        2: ["#EDEDF9",
+          "#FAF9FF",
+          "#D3D3DF",
+          "#000"]
+      }
+      var mainData = {
+        theme: new OnChange(onThemeChange),
+        language: new OnChange(onLangChange),
+        availableLanguages: new OnChange(onAvailableLanguagesChange),
+        newLinks: new OnChange(onNewLinksChange),
+        links: new OnChange(onLinksChange),
+        games: new OnChange(onGamesChange)
+      };
+      setDatum("language", navigator.language.split("-")[0] || "en");
+      setDatum("theme", 0);
+      setDatum("availableLanguages", Object.keys(languagesContent));
+      setDatum("newLinks", true);
+      setDatum("games", {
+        "0": {
+          "nameText": "ticTacToeName",
+          "descriptionText": "ticTacToeDescription",
+          "link": "sx-play-zone.blogspot.com/p/tic-tac-toe.html",
+          "img": "",
+        },
+        "1": {
+          "nameText": "questionsGameName",
+          "descriptionText": "questionsGameDescription",
+          "img": "",
+        }
+      });
+      
+      currentLanguage.onclick = function() {
+        availableLanguages.classList.add("show");
+        availableLanguages.offclick(function() {
+          availableLanguages.classList.remove("show");
+        });
+      }
+
+      function onGamesChange(value) {
+        const gamesValues = Object.values(value);
+        const gamesKeys = Object.keys(value);
+        gamesValues.forEach((gameValue, index)=> {
+          const gameKey = gamesKeys[index];
+          var gameElement = gamesContainer.querySelector(`[data-id="${gameKey}"]`);
+          if (!gameElement) {
+            gameElement = document.createElement("div");
+            gameElement.classList.add("game");
+            if (gameValue.link) {
+              gameElement.dataset.link = gameValue.link;
+              setDatum("newLinks", true);
+            }
+            
+            const gameImg = document.createElement('img');
+            gameImg.src = gameValue.img;
+            gameImg.classList.add("game-img");
+            gameElement.appendChild(gameImg);
+            gameImg.onerror = function() {
+              const alternativeImg = "/storage/emulated/0/Download/game.png";
+              gameImg.src = alternativeImg;
+            }
+
+            const gameName = document.createElement('div');
+            gameName.classList.add('game-name');
+            gameName.dataset["langtext"] = gameValue.nameText;
+            gameElement.appendChild(gameName);
+
+            const gameDescription = document.createElement('div');
+            gameDescription.classList.add('game-description');
+            gameDescription.dataset["langtext"] = gameValue.descriptionText;
+            gameElement.appendChild(gameDescription);
+
+            gamesContainer.appendChild(gameElement);
+            changeContentLang(getLangContent(), gameValue.datalang);
+          }
+        });
+      }
+      
+      function onThemeChange(value) {
+        var currentTheme = themes[value];
+        if (!currentTheme) {
+          currentTheme = themes[0];
+        }
+        currentTheme.forEach(function(color, index) {
+          root.style.setProperty(`--theme-bg-${index}`, currentTheme[index]);
+        });
+      }
+
+      function onLangChange(value) {
+        currentLanguage.dataset["langtext"] = `${value}Language`;
+        changeContentLang(getLangContent());
+      }
+      
+      function onAvailableLanguagesChange(value) {
+        availableLanguages.innerHTML = "";
+        value.forEach((languageCode, index)=> {
+          availableLanguages.innerHTML += `
+          <div data-langtext="${languageCode}Language" class="language" data-langcode="${languageCode}" class="language"></div>
+          `;
+          changeContentLang(getLangContent(), `${languageCode}Language`);
+        });
+        const languages = availableLanguages.querySelectorAll(".language");
+        languages.forEach((language)=>{
+          language.onclick = function() {
+            setDatum("language", language.dataset["langcode"]);
+            availableLanguages.classList.remove("show");
+          }
+        });
+      }
+      
+      function onNewLinksChange(value) {
+        if (value !== true) return;
+        const links = Object.values(qA(`*`)).filter(e=>e.dataset["link"]);
+        setDatum("links", links);
+      }
+      
+      function onLinksChange(value) {
+        value.forEach((link)=>{
+          link.onclick = function() {
+            const url = link.dataset.link;
+            window.location.href = url;
+          }
+        });
+        setDatum("newLinks", false);
+      }
+
+      function getLangContent() {
+        return languagesContent[getDatum("language")];
+      }
+
+      function getDatum(datum) {
+        return mainData[datum].value;
+      }
+
+      function setDatum(datum, value) {
+        mainData[datum].change(value);
+      }
+    }
+    /* run real code */
+    realCode();
+
+    /* remove default elements on template */
+    function deepClean(element) {
+      if (element.contains(realPage) && element !== realPage) {
+        element.removeAttribute("class");
+        element.removeAttribute("id");
+        element.removeAttribute("style");
+        return;
+      }
+      if (realPage.contains(element) || element === realPage) {
+        return;
+      }
+      element.remove();
+    }
+
+    function deleteStyles_Scripts() {
+      const scripts = qA("script");
+      scripts.forEach(script => {
+        if (!script.classList.contains("realScript")) {
+          script.remove();
+        }
+      });
+      const styles = qA("style");
+      styles.forEach(style => {
+        if (!style.classList.contains("realStyle")) {
+          style.remove();
+        }
+      });
+    }
+
+    function deleteElements() {
+      const allElements = Array.from(body.querySelectorAll("*"));
+      allElements.forEach(deepClean);
+    }
+
+
+    function startClean() {
+      return new Promise((resolve, rejected)=> {
+        deleteStyles_Scripts();
+        body.classList.add("ds-none");
+        setTimeout(function() {
+          deleteStyles_Scripts();
+          setTimeout(function() {
+            deleteElements();
+            body.classList.remove("ds-none");
+            body.dir = "ltr";
+            body.removeAttribute("lang");
+            resolve();
+          },
+            100);
+        }, 0);
+      });
+    }
+
+    /* public things */
+    class OnChange {
+      constructor(fun,
+        value,
+        runInStart) {
+        this.fun = fun;
+        this.value = value;
+        this.runInStart = runInStart;
+        if (this.runInStart) {
+          this.fun(this.value);
+        }
+      }
+      change(value) {
+        this.value = value;
+        if (this.fun) {
+          this.fun(value);
+        }
+      }
+      changeFun(fun) {
+        this.fun = fun;
+      }
+      changeRunInStart(value) {
+        this.runInStart = value;
+      }
+    }
+
+    Element.prototype.allChildren = function(includeSelf = false) {
+      let children = Array.from(this.children);
+      children.forEach(child => {
+        children.push(...child.allChildren());
+      });
+      return includeSelf ? [this,
+        ...children]: children;
+    };
+
+    Element.prototype.offclick = function (fun,
+      other = {}) {
+      let element = this;
+
+      if (other == true) other = {
+        elementPlus: true
+      }
+      let conditon = other.conditon || 'true',
+      lockEvents = other.lockEvents || false,
+      elementPlus = other.elementPlus,
+      notLock = other.notLock,
+      clearEvent = other.clearEvent;
+      document.addEventListener('mouseup',
+        offClick);
+
+      let elements = [element];
+      if (elementPlus && elementPlus.v) {
+        if (an.isOneElement(elementPlus)) elements = [element,
+          elementPlus];
+        else elements = [element,
+          ...elementPlus];
+      }
+
+      if (lockEvents) {
+        if (!notLock) notLock = elements;
+        element.lockEvents('lock', notLock);
+      }
+
+      function offClick(events) {
+        let event = events || events.changedTouches[0];
+
+        if (elementPlus == true) {
+          removeEvent(event);
+          return;
+        }
+
+        let isNoClick = elements.length;
+        elements.forEach(element => {
+          if (event.target !== element) isNoClick--;
+          if (element.children) {
+            isNoClick += element.allChildren().length;
+            element.allChildren().forEach(child=> {
+              if (event.target !== child) isNoClick--;
+            });
+          }
+        });
+        var cond = typeof conditon == 'function' ? conditon(event): typeof conditon == 'boolean' ? conditon: '';
+        if (isNoClick === 0 && cond !== false || cond === true) removeEvent(event);
+      }
+      function removeEvent(event) {
+        document.removeEventListener('mouseup', offClick);
+        if (lockEvents) element.lockEvents('unlock', notLock);
+        if (typeof fun == 'function') fun(event);
+      }
+    }
+
+    function changeContentLang(langContent, key, {
+      deeperKey = null, variableValue = null
+    } = {}) {
+      const langContentKeys = Object.keys(langContent);
+      const langContentValues = Object.values(langContent);
+      if (langContentKeys.length < 1) return;
+      if (key) {
+        changeElementContent(key, {
+          deeperKey: deeperKey,
+          variableValue: variableValue
+        });
+        return;
+      }
+      langContentKeys.forEach((langContentKey, index)=>changeElementContent(langContentKey));
+
+      function changeElementContent(key, {
+        deeperKey = null, variableValue = null
+      } = {}) {
+        const elements = Object.values(qA(`*`)).filter(e=>e.dataset["langtext"] === key);
+        if (elements.length < 1) return;
+        var value = langContent[key];
+        if (deeperKey) {
+          elements.forEach((element)=>element.dataset["sublangtext"] = deeperKey);
+          value = value[deeperKey];
+        }
+        if (variableValue) {
+          value = value.replace(/\$\{(.*?)\}/g, (_, variable) => {
+            const keys = variable.split('.');
+            return keys.reduce((acc, key) => acc && acc[key], {
+              variableValue
+            });
+          });
+        }
+        elements.forEach((element)=>element.textContent = value);
+      }
+    }
+  </script>
+</div>
