@@ -11,12 +11,12 @@ SystemJS.config({
   map: {
     'plugin-babel': 'systemjs-plugin-babel@latest/plugin-babel.js',
     'systemjs-babel-build': 'systemjs-plugin-babel@latest/systemjs-babel-browser.js',
-    'react': 'react@18/umd/react.production.min.js',
-    'react-dom': 'react-dom@18/umd/react-dom.production.min.js',
-    'prop-types': 'prop-types@15.6/prop-types.js',
-    'classnames': 'classnames@2.2.6/index.js',
-    '@material-ui/core': '@material-ui/core@3.2.2/umd/material-ui.development.js',
-    '@material-ui/icons': '@material-ui/icons@3.0.1/index.js',
+    'react': 'react@latest/umd/react.production.min.js',
+    'react-dom': 'react-dom@latest/umd/react-dom.production.min.js',
+    'prop-types': 'prop-types@latest/prop-types.js',
+    'classnames': 'classnames@latest/index.js',
+    '@mui/material': '@mui/material@latest/umd/material-ui.development.js',
+    '@mui/icons-material': '@mui/icons-material@latest/index.js',
   },
   transpiler: 'plugin-babel'
 });
