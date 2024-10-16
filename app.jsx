@@ -10,7 +10,7 @@ const App = () => {
   );
 };
 
-function changeContentLang(langContent, key, {
+function changeContentLang(key, {
   deeperKey = null, variableValue = null
 } = {}) {
   const langContentKeys = Object.keys(langContent);
