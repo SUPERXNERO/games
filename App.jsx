@@ -15,7 +15,7 @@ const App = () => {
   return (
     <LangContext.Provider value={{ lang, setLang }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        hello world
+        hello world in javascript
       </ThemeContext.Provider>
     </LangContext.Provider>
   );
