@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
-
 const LangContext = React.createContext();
 const ThemeContext = React.createContext();
 
 const App = () => {
-  const [lang, setLang] = useState(navigator.language.split("-")[0]);
-  const [theme, setTheme] = useState("light");
+  const [lang, setLang] = React.useState(navigator.language.split("-")[0]);
+  const [theme, setTheme] = React.useState("light");
   return (
     <LangContext.Provider value={{ lang, setLang }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
+        hello world
       </ThemeContext.Provider>
     </LangContext.Provider>
   );
