@@ -1,3 +1,7 @@
+// variables
+
+
+// contexts
 const LangContext = React.createContext();
 const ThemeContext = React.createContext();
 
