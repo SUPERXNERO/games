@@ -7,6 +7,7 @@ const App = () => {
   const [state, setState] = useState();
   return (
     <langContent.Provider value={{ theme, setTheme }}>
+    </langContent.Provider>
   );
 };
 
