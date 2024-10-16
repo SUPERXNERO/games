@@ -9,7 +9,7 @@ SystemJS.config({
     }
   },
   map: {
-    'plugin-babel': 'systemjs-plugin-babel@latest/plugin-babel.js',
+    'plugin-babel': '@babel/standalone/babel.min.js',
     'systemjs-babel-build': 'systemjs-plugin-babel@latest/systemjs-babel-browser.js',
     'react': 'react-dom@18/umd/react-dom.production.min.js',
     'react-dom': 'react-dom@16.14.0/umd/react-dom.development.js',
