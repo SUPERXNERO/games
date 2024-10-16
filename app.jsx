@@ -8,7 +8,9 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   return (
     <LangContent.Provider value={{ theme, setTheme }}>
-    
+      <LangContent.Provider value={{ theme, setTheme }}>
+        
+      </LangContent.Provider>
     </LangContent.Provider>
   );
 };
