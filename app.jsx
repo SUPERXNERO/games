@@ -11,7 +11,7 @@ const App = () => {
 };
 
 function changeContentLang(key, {
-  deeperKey = null, variableValue = null
+  nestedKey = null, variableValue = null
 } = {}) {
   const langContentKeys = Object.keys(langContent);
   const langContentValues = Object.values(langContent);
