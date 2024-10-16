@@ -4,10 +4,10 @@ const LangContext = React.createContext();
 const ThemeContext = React.createContext();
 
 const App = () => {
-  const [state, setState] = useState();
+  const [theme, setTheme] = useState();
   return (
-    <langContent.Provider value={{ theme, setTheme }}>
-    </langContent.Provider>
+    <LangContent.Provider value={{ theme, setTheme }}>
+    </LangContent.Provider>
   );
 };
 
