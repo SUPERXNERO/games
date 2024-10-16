@@ -4,7 +4,7 @@ const LangContext = React.createContext();
 const ThemeContext = React.createContext();
 
 const App = () => {
-  const [theme, setTheme] = useState();
+  const [theme, setTheme] = useState("light");
   return (
     <LangContent.Provider value={{ theme, setTheme }}>
     
