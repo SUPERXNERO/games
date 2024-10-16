@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react';
 
+const LangContext = React.createContext();
+const ThemeContext = React.createContext();
+
 const App = () => {
   const [state, setState] = useState();
   return (
-    
+    <langContent.Provider value={{ theme, setTheme }}>
   );
 };
 
