@@ -15,7 +15,6 @@ function changeContentLang(key, {
 } = {}) {
   var value = langContent[key];
   if (nestedKey) {
-    elements.forEach((element)=>element.dataset["sublangtext"] = nestedKey);
     value = value[nestedKey];
   }
   if (variableValue) {
