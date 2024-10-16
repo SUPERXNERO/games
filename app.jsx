@@ -1,4 +1,5 @@
-// Simple React component
+import React, { useState, useContext } from 'react';
+
 const App = () => {
   const [state, setState] = useState();
   return (
