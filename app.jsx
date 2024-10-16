@@ -13,8 +13,6 @@ const App = () => {
 function changeContentLang(key, {
   nestedKey = null, variableValue = null
 } = {}) {
-  const elements = Object.values(qA(`*`)).filter(e=>e.dataset["langtext"] === key);
-  if (elements.length < 1) return;
   var value = langContent[key];
   if (nestedKey) {
     elements.forEach((element)=>element.dataset["sublangtext"] = nestedKey);
