@@ -9,7 +9,7 @@ const App = () => {
   return (
     <LangContent.Provider value={{ lang, setLang }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        
+        hello wod
       </ThemeContext.Provider>
     </LangContent.Provider>
   );
