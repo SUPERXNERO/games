@@ -1,5 +1,6 @@
 // Simple React component
 const App = () => {
+  const [state, setState] = useState();
   return (
     <div>
       <h1>Hello, React from an external file!</h1>
