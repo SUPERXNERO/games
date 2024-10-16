@@ -18,7 +18,7 @@ function changeContentLang(key, {
   if (langContentKeys.length < 1) return;
   if (key) {
     changeElementContent(key, {
-      deeperKey: deeperKey,
+      nestedKey: nestedKey,
       variableValue: variableValue
     });
     return;
@@ -26,14 +26,14 @@ function changeContentLang(key, {
   langContentKeys.forEach((langContentKey, index)=>changeElementContent(langContentKey));
 
   function changeElementContent(key, {
-    deeperKey = null, variableValue = null
+    nestedKey = null, variableValue = null
   } = {}) {
     const elements = Object.values(qA(`*`)).filter(e=>e.dataset["langtext"] === key);
     if (elements.length < 1) return;
     var value = langContent[key];
-    if (deeperKey) {
-      elements.forEach((element)=>element.dataset["sublangtext"] = deeperKey);
-      value = value[deeperKey];
+    if (nestedKey) {
+      elements.forEach((element)=>element.dataset["sublangtext"] = nestedKey);
+      value = value[nestedKey];
     }
     if (variableValue) {
       value = value.replace(/\$\{(.*?)\}/g, (_, variable) => {
