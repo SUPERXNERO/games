@@ -38,5 +38,5 @@ function changeElementLang(key, {
 }
 
 // Render the App component to the root div
-ReactDOM.render(<App />, root);
+//ReactDOM.render(<App />, root);
 ReactDOM.createRoot(root).render(<App />);
