@@ -31,9 +31,7 @@ function changeElementLang(key, {
   if (variableValue) {
     value = value.replace(/\$\{(.*?)\}/g, (_, variable) => {
       const keys = variable.split('.');
-      return keys.reduce((acc, key) => acc && acc[key], {
-        variableValue
-      });
+      return keys.reduce((acc, key) => acc && acc[key], {variableValue});
     });
   }
   return value;
