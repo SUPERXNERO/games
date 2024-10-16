@@ -7,10 +7,10 @@ const App = () => {
   const [lang, setLang] = useState(navigator.language.split("-")[0]);
   const [theme, setTheme] = useState("light");
   return (
-    <LangContent.Provider value={{ lang, setLang }}>
+    <LangContext.Provider value={{ lang, setLang }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
       </ThemeContext.Provider>
-    </LangContent.Provider>
+    </LangContext.Provider>
   );
 };
 
