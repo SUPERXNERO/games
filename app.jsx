@@ -10,7 +10,7 @@ const App = () => {
   );
 };
 
-function changeContentLang(key, {
+function changeElementLang(key, {
   nestedKey = null, variableValue = null
 } = {}) {
   var value = langContent[key];
