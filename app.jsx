@@ -25,7 +25,7 @@ function changeContentLang(key, {
       });
     });
   }
-  elements.forEach((element)=>element.textContent = value);
+  return value;
 }
 
 // Render the App component to the root div
