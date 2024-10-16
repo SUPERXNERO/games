@@ -13,38 +13,23 @@ const App = () => {
 function changeContentLang(key, {
   nestedKey = null, variableValue = null
 } = {}) {
-  const langContentKeys = Object.keys(langContent);
-  const langContentValues = Object.values(langContent);
-  if (langContentKeys.length < 1) return;
-  if (key) {
-    changeElementContent(key, {
-      nestedKey: nestedKey,
-      variableValue: variableValue
-    });
-    return;
-  }
-  langContentKeys.forEach((langContentKey, index)=>changeElementContent(langContentKey));
 
-  function changeElementContent(key, {
-    nestedKey = null, variableValue = null
-  } = {}) {
-    const elements = Object.values(qA(`*`)).filter(e=>e.dataset["langtext"] === key);
-    if (elements.length < 1) return;
-    var value = langContent[key];
-    if (nestedKey) {
-      elements.forEach((element)=>element.dataset["sublangtext"] = nestedKey);
-      value = value[nestedKey];
-    }
-    if (variableValue) {
-      value = value.replace(/\$\{(.*?)\}/g, (_, variable) => {
-        const keys = variable.split('.');
-        return keys.reduce((acc, key) => acc && acc[key], {
-          variableValue
-        });
-      });
-    }
-    elements.forEach((element)=>element.textContent = value);
+  const elements = Object.values(qA(`*`)).filter(e=>e.dataset["langtext"] === key);
+  if (elements.length < 1) return;
+  var value = langContent[key];
+  if (nestedKey) {
+    elements.forEach((element)=>element.dataset["sublangtext"] = nestedKey);
+    value = value[nestedKey];
   }
+  if (variableValue) {
+    value = value.replace(/\$\{(.*?)\}/g, (_, variable) => {
+      const keys = variable.split('.');
+      return keys.reduce((acc, key) => acc && acc[key], {
+        variableValue
+      });
+    });
+  }
+  elements.forEach((element)=>element.textContent = value);
 }
 
 // Render the App component to the root div
