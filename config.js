@@ -22,4 +22,4 @@ SystemJS.config({
 });
 
 SystemJS.import('./App.jsx')
-  .catch(console.log("console"));
+  .catch(console.error.bind(console));
