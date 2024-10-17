@@ -27,7 +27,13 @@ const App = () => {
   return (
     <LangContext.Provider value={{ lang, setLang }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        <AppBar />
+        <AppBar position="fixed" color="primary" elevation={4}>
+          <Toolbar>
+            <Typography variant="h6">
+              My App
+            </Typography>
+          </Toolbar>
+        </AppBar>
       </ThemeContext.Provider>
     </LangContext.Provider>
   );
