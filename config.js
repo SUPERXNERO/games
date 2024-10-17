@@ -1,5 +1,3 @@
-console.log(root);
-
 SystemJS.config({
   baseURL:'https://unpkg.com/',
   defaultExtension: 'true',
