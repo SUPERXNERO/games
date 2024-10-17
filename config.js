@@ -21,5 +21,5 @@ SystemJS.config({
   transpiler: 'plugin-babel'
 });
 
-SystemJS.import('https://superxnero.github.io/games/App.jsx')
+SystemJS.import('/App.jsx')
   .catch(console.error.bind(console));
