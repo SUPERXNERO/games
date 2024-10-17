@@ -30,7 +30,7 @@ const App = () => {
         <AppBar position="fixed" color="primary" elevation={4}>
           <Toolbar>
             <Typography variant="h6">
-              My App
+              My bad
             </Typography>
           </Toolbar>
         </AppBar>
