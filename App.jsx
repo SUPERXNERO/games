@@ -1,6 +1,18 @@
 // imports
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  AppBar,
+  Badge,
+  CssBaseline,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  Toolbar,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 
 // variables
 
