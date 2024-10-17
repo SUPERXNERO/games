@@ -15,6 +15,8 @@ SystemJS.config({
     'react-dom': 'react-dom@latest/umd/react-dom.production.min.js',
     'prop-types': 'prop-types@latest/prop-types.js',
     'classnames': 'classnames@latest/index.js',
+    '@material-ui/core': '@material-ui/core@latest/umd/material-ui.development.js',
+    '@material-ui/icons': '@material-ui/icons@3.0.1/index.js',
     '@mui/material': '@mui/material@latest/umd/material-ui.development.js',
     '@mui/icons-material': '@mui/icons-material@latest/index.js',
   },
